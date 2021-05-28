@@ -79,7 +79,7 @@ const paths = {
           schema: {
             type: 'string',
           },
-          required: true,
+          required: false,
         },
       ],
       responses: {

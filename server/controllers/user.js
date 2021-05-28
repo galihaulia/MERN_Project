@@ -22,13 +22,21 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
     }
   }
 
-  return res.status(200).json(data)
+  return res.jsend.success(data)
 })
 
 exports.getDataUser = asyncHandler(async (req, res, next) => {
   const { user_id } = req.query
+  const { id } = req.user
 
-  const user = await DB_USERS.findById(user_id)
+  let userId
+  if (user_id) {
+    userId = user_id
+  } else {
+    userId = id
+  }
+
+  const user = await DB_USERS.findById(userId)
 
   let data
   if (user) {
@@ -39,10 +47,10 @@ exports.getDataUser = asyncHandler(async (req, res, next) => {
       email: user.email,
     }
   } else {
-    return res.status(400).json({
-      message: 'User not found.',
+    return res.status(400).jsend.error({
+      message: 'User not found',
     })
   }
 
-  return res.status(200).json(data)
+  return res.jsend.success(data)
 })

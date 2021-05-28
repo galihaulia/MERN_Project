@@ -19,17 +19,17 @@ const schema = {
       },
     },
   },
-  // login:{
-  //     title: "User Login",
-  //     properties: {
-  //         email: {
-  //             type: "string"
-  //         },
-  //         password: {
-  //             type: "string"
-  //         }
-  //     }
-  // },
+  login: {
+    title: 'User Login',
+    properties: {
+      email: {
+        type: 'string',
+      },
+      password: {
+        type: 'string',
+      },
+    },
+  },
 }
 const paths = {
   '/register': {
@@ -60,34 +60,34 @@ const paths = {
       },
     },
   },
-  // "/login":{
-  //     post: {
-  //         tags: [tag],
-  //         requestBody: {
-  //             content: {
-  //                 "application/json":{
-  //                     schema: util1.getSchemaRequest("login")
-  //                 }
-  //             }
-  //         },
-  //         responses: {
-  //             200 : {
-  //                 description: "Login User",
-  //                 content: {
-  //                     "application/json":{
-  //                         schema: {
-  //                             properties: {
-  //                                 message: {
-  //                                     type: "string"
-  //                                 }
-  //                             }
-  //                         }
-  //                     }
-  //                 }
-  //             }
-  //         }
-  //     }
-  // },
+  '/login': {
+    post: {
+      tags: [tag],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: util1.getSchemaRequest('login'),
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: 'Login User',
+          content: {
+            'application/json': {
+              schema: {
+                properties: {
+                  message: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
 
 exports.default = { schema, paths }

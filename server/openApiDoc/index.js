@@ -1,14 +1,8 @@
 const authDoc = require('./auth.docs')
 const usersDoc = require('./users.docs')
-// const itemsDoc = require('./items.docs')
-// const reportsDoc = require('./reports.docs')
+const eventsDoc = require('./events.docs')
 
-const allDocs = [
-  authDoc.default,
-  usersDoc.default,
-  //   itemsDoc.default,
-  //   reportsDoc.default,
-]
+const allDocs = [authDoc.default, usersDoc.default, eventsDoc.default]
 let apiDoc = {
   openapi: '3.0.0',
   info: {
