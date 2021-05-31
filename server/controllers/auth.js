@@ -66,13 +66,13 @@ exports.login = asyncHandler(async (req, res, next) => {
   if (user) {
     const checkPassword = bcrypt.compareSync(password, user.password)
     if (checkPassword) {
-      token = await generateTokens(user.id)
+      token = await generateTokens(user)
       const upSert = await upsert(
         {
           usersId: user.id,
           token: token,
         },
-        user.id,
+        { usersId: user.id },
         DB_TOKENS,
       )
     } else {

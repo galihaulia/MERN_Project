@@ -34,18 +34,21 @@ const schema = {
     },
   },
   eventSchema: {
-    title: 'Get User',
+    title: 'Get Data Event',
     properties: {
       id: {
         type: 'integer',
       },
-      firstName: {
+      title: {
         type: 'string',
       },
-      lastName: {
+      description: {
         type: 'string',
       },
-      email: {
+      price: {
+        type: 'number',
+      },
+      image: {
         type: 'string',
       },
     },
@@ -63,6 +66,44 @@ const schema = {
         type: 'number',
       },
       image: {
+        type: 'string',
+      },
+    },
+  },
+  updateEventSchema: {
+    title: 'Update Event',
+    properties: {
+      event_id: {
+        type: 'string',
+      },
+      title: {
+        type: 'string',
+      },
+      description: {
+        type: 'string',
+      },
+      price: {
+        type: 'number',
+      },
+      images: {
+        type: 'array',
+        items: {
+          properties: {
+            image_name: {
+              type: 'string',
+            },
+            deletion: {
+              type: 'integer',
+            },
+          },
+        },
+      },
+    },
+  },
+  deleteEventSchema: {
+    title: 'Delete Event',
+    properties: {
+      event_id: {
         type: 'string',
       },
     },
@@ -90,33 +131,33 @@ const paths = {
     },
   },
   '/event': {
-    // get: {
-    //   tags: [tag],
-    //   parameters: [
-    //     {
-    //       name: 'user_id',
-    //       in: 'query',
-    //       schema: {
-    //         type: 'string',
-    //       },
-    //       required: true,
-    //     },
-    //   ],
-    //   responses: {
-    //     200: {
-    //       description: 'Get User',
-    //       content: {
-    //         'application/json': {
-    //           schema: util1.getSchemaResponse(
-    //             'userSchema',
-    //             'userSchema',
-    //             'object',
-    //           ),
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
+    get: {
+      tags: [tag],
+      parameters: [
+        {
+          name: 'event_id',
+          in: 'query',
+          schema: {
+            type: 'string',
+          },
+          required: true,
+        },
+      ],
+      responses: {
+        200: {
+          description: 'Get Data Event',
+          content: {
+            'application/json': {
+              schema: util1.getSchemaResponse(
+                'eventSchema',
+                'eventSchema',
+                'object',
+              ),
+            },
+          },
+        },
+      },
+    },
     post: {
       tags: [tag],
       requestBody: {
@@ -143,58 +184,58 @@ const paths = {
         },
       },
     },
-    // put: {
-    //     tags: [tag],
-    //     requestBody: {
-    //         content: {
-    //             "application/json":{
-    //                 schema: util1.getSchemaRequest("userModification")
-    //             }
-    //         }
-    //     },
-    //     responses: {
-    //         200 : {
-    //             description: "User Modification",
-    //             content: {
-    //                 "application/json":{
-    //                     schema: {
-    //                         properties: {
-    //                             message: {
-    //                                 type: "string"
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // },
-    // delete: {
-    //     tags: [tag],
-    //     requestBody: {
-    //         content: {
-    //             "application/json":{
-    //                 schema: util1.getSchemaRequest("userDeletion")
-    //             }
-    //         }
-    //     },
-    //     responses: {
-    //         200 : {
-    //             description: "User Deletion",
-    //             content: {
-    //                 "application/json":{
-    //                     schema: {
-    //                         properties: {
-    //                             message: {
-    //                                 type: "string"
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    put: {
+      tags: [tag],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: util1.getSchemaRequest('updateEventSchema'),
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: 'Update Event',
+          content: {
+            'application/json': {
+              schema: {
+                properties: {
+                  message: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    delete: {
+      tags: [tag],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: util1.getSchemaRequest('deleteEventSchema'),
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: 'Delete Event',
+          content: {
+            'application/json': {
+              schema: {
+                properties: {
+                  message: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   '/event/image': {
     post: {
