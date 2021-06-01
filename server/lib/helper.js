@@ -25,19 +25,10 @@ exports.generateTokens = async (user) => {
 }
 
 exports.upsert = async (values, condition, MODEL) => {
-  // const find = await DB_TOKENS.find(condition)
-  // if (find) {
-  //   console.log('update')
-  //   return MODEL.updateOne(condition, values)
-  // }
-  // console.log('not found')
-  // return MODEL.create(values)
   return MODEL.find(condition).then((result) => {
     if (result.length != 0) {
-      console.log('update')
       return MODEL.updateOne(condition, values)
     }
-    console.log('not found')
     return MODEL.create(values)
   })
 }

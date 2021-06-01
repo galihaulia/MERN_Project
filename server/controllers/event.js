@@ -96,14 +96,11 @@ exports.updateEvent = asyncHandler(async (req, res, next) => {
     }
 
     try {
-      let value = {
-        title: title,
-        description: description,
-        price: price,
-        updatedAt: now,
-      }
-
-      const updateEvent = await DB_EVENTS.findByIdAndUpdate(event_id, value)
+      event.title = title
+      event.description = description
+      event.price = price
+      event.updatedAt = now
+      await event.save()
 
       return res.jsend.success({
         message: 'Event has been updated.',
